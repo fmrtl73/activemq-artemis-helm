@@ -46,13 +46,10 @@ spec:
                   release: {{ .Release.Name | quote }}
                   component: slave
         {{- end }}
-      strategy:
-        type: Recreate
       initContainers:
       - name: configure-cluster
         image: {{ template "artemis.image" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
-        imagePullSecrets: {{ toYaml .Values.image.pullSecrets }}
         command: ["/bin/sh", "/opt/configure-master/configure-cluster.sh"]
         volumeMounts:
           - name: config-override

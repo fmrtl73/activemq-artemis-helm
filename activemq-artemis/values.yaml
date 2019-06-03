@@ -51,11 +51,11 @@ replica:
 ## Persist data to a persitent volume
 persistence:
   testJournalPerformance: AUTO
-  enabled: false
+  enabled: true
   ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
   ## Default: volume.alpha.kubernetes.io/storage-class: default
   ##
-  # storageClass:
+  storageClass: px-ha-sc
   accessMode: ReadWriteOnce
   size: 8Gi
 
@@ -70,7 +70,7 @@ resources:
 # A load balander might confuse Minikube when installing with Helm and --wait
 # Probably this is only useful for minikube environments and CI
 loadbalancer:
-  enabled: true
+  enabled: false
 
 ## Prometheus Exporters / Metrics
 ##
@@ -100,4 +100,3 @@ prometheus:
       ## [Kube Prometheus Selector Label](https://github.com/coreos/prometheus-operator/blob/master/helm/kube-prometheus/values.yaml#L298)
       selector:
         prometheus: kube-prometheus
-
