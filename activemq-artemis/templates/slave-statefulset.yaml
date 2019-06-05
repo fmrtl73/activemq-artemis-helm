@@ -30,8 +30,12 @@ spec:
       - name: configure-cluster
         image: {{ template "artemis.image" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        securityContext:
+          runAsUser: 0
         command: ["/bin/sh", "/opt/configure-slave/configure-cluster.sh"]
         volumeMounts:
+          - name: data
+            mountPath: /var/lib/artemis/data
           - name: config-override
             mountPath: /var/lib/artemis/etc-override
           - name: configure-common
