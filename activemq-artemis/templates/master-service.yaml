@@ -5,10 +5,14 @@ metadata:
     # Make sure DNS is resolvable during initialization.
     service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
   name: {{ include "artemis.fullname" . }}-master
+  namespace: {{ include "namespace" . }}
   labels:
 {{ include "artemis.labels.standard" . | indent 4 }}
     component: artemis-node
 spec:
+  type: LoadBalancer
+  selector:
+    app: {{ include "artemis.labels.standard" . }}
   ports:
   - name: http
     port: 8161
@@ -27,3 +31,18 @@ spec:
     app: {{ template "artemis.name" . }}
     release: {{ .Release.Name | quote }}
     component: master
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: amq
+  namespace: default
+spec:
+  rules:
+  - host: amq.px
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ include "artemis.fullname" . }}-master
+          servicePort: 8161

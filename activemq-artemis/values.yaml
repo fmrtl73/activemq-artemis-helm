@@ -1,4 +1,4 @@
-
+namespace: amq
 image:
   # image.registry is the repository where the ActiveMQ Artemis image is stored
   registry: docker.io
