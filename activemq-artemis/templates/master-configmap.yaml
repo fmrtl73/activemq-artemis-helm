@@ -36,7 +36,7 @@ data:
     cp /opt/configure-master/template-master.xml /var/lib/artemis/etc-override/broker-11.xml
     
     echo Adding roles to artemis user
-    cat "admin:{{ .Values.artemisUser }}" >> /var/lib/artemis/etc/artemis-roles.properties 
+    echo "admin:{{ .Values.artemisUser }}" >> /var/lib/artemis/etc/artemis-roles.properties 
 
     GROUPNAME=$(echo ${HOSTNAME} | sed -re 's/(-slave|-master)//')
     echo Setting the group-name for slave to ${GROUPNAME}
