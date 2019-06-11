@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "artemis.fullname" . }}-master
-  namespace: {{ include "namespace" . }}
+  namespace: {{ .Release.Namespace }}
   annotations:
 {{ toYaml .Values.deployment.annotations | indent 4 }}
   labels:

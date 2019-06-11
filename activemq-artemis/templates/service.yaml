@@ -8,7 +8,7 @@ metadata:
     # Exclude unready slave nodes from DNS
     service.alpha.kubernetes.io/tolerate-unready-endpoints: "false"
   name: {{ include "artemis.fullname" . }}
-  namespace: {{ include "namespace" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
 {{ include "artemis.labels.standard" . | indent 4 }}
 spec:
