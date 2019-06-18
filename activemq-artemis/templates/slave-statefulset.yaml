@@ -27,6 +27,8 @@ spec:
         release: {{ .Release.Name | quote }}
         component: slave
     spec:
+      securityContext:
+        runAsUser: 0
       initContainers:
       - name: configure-cluster
         image: {{ template "artemis.image" . }}

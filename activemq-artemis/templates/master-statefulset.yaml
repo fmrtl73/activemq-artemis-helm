@@ -47,6 +47,8 @@ spec:
                   release: {{ .Release.Name | quote }}
                   component: slave
         {{- end }}
+      securityContext:
+        runAsUser: 0
       initContainers:
       - name: configure-cluster
         image: {{ template "artemis.image" . }}
@@ -55,6 +57,8 @@ spec:
         volumeMounts:
           - name: config-override
             mountPath: /var/lib/artemis/etc-override
+          - name: data
+            mountPath: /var/lib/artemis/data
           - name: configure-common
             mountPath: /opt/configure-common
           - name: configure-master

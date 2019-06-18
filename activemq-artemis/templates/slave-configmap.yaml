@@ -36,7 +36,6 @@ data:
 
     echo Assigning node as slave
     cp /opt/configure-slave/template-slave.xml /var/lib/artemis/etc-override/broker-11.xml 
-
     GROUPNAME=$(echo ${HOSTNAME} | sed -re 's/(-slave|-master)//')
     echo Setting the group-name for slave to ${GROUPNAME}
     xmlstarlet ed -L \

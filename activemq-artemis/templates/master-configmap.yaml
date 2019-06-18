@@ -37,7 +37,7 @@ data:
     
     echo Adding roles to artemis user
     echo "admin:{{ .Values.artemisUser }}" >> /var/lib/artemis/etc/artemis-roles.properties 
-
+    chown artemis /var/lib/artemis/data
     GROUPNAME=$(echo ${HOSTNAME} | sed -re 's/(-slave|-master)//')
     echo Setting the group-name for slave to ${GROUPNAME}
     xmlstarlet ed -L \
